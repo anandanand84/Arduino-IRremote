@@ -80,6 +80,11 @@ int  IRrecv::decode (decode_results *results)
 	if (decodeDenon(results))  return true ;
 #endif
 
+#if DECODE_MILESTAG
+    DBG_PRINTLN("Attempting Milestag decode");
+    if (decodeMilestag(results))  return true ;
+#endif
+
 	// decodeHash returns a hash on any input.
 	// Thus, it needs to be last in the list.
 	// If you add any decodes, add them before this.

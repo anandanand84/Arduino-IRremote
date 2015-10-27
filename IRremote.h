@@ -28,6 +28,9 @@
 // Each protocol you include costs memory and, during decode, costs time
 // Disable (set to 0) all the protocols you do not need/want!
 //
+#define DECODE_MILESTAG  	 1
+#define SEND_MILESTAG    	 1
+
 #define DECODE_RC5           1
 #define SEND_RC5             1
 
@@ -115,6 +118,7 @@ typedef
 		SHARP,
 		DENON,
 		PRONTO,
+		MILESTAG,
 	}
 decode_type_t;
 
@@ -243,6 +247,10 @@ class IRrecv
 #		if DECODE_DENON
 			bool  decodeDenon (decode_results *results) ;
 #		endif
+
+#		if DECODE_MILESTAG
+          bool  decodeMilestag (decode_results *results) ;
+#		endif
 } ;
 
 //------------------------------------------------------------------------------
@@ -327,6 +335,11 @@ class IRsend
 #		if SEND_PRONTO
 			void  sendPronto     (char* code,  bool repeat,  bool fallback) ;
 #		endif
+			
+#		if SEND_MILESTAG
+          void  sendMilestag (unsigned long data,  int nbits) ;
+#		endif
+
 } ;
 
 #endif
